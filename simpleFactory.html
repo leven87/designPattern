@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>简单工厂模式示例</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            Cat = function(){
+                this.instruction = "I'm a cat.";
+                this.getInstruction = function(){
+                    return this.instruction;
+                }
+            }
+ 
+            Dog = function(){
+                this.instruction = "I'm a dog.";
+                this.getInstruction = function(){
+                    return this.instruction;
+                }
+            }
+            
+            AnimalFactory = function(){
+            }
+            AnimalFactory.create = function(type){//使用js中的类方法来定义静态方法,类方法只能被类调用而不能被类的实例调用
+                    return eval("new "+ type +"();");
+            }
+            
+            var cat = AnimalFactory.create("Cat");
+            console.log(cat.getInstruction());//I'm a cat.
+        </script>    
+    </head>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>工厂方法模式示例</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+           /*
+            * 为了简便，这里采用注释法来定义接口，并没有对实现类做严格的检测
+            * 工厂接口(抽象工厂） 
+            interface IAnimal{
+            function create();
+            }
+            */ 
+            
+            /*
+             * 具体工厂(Concrete Creator)角色：猫工厂 
+             */
+            CatFactory = function(){
+                this.create = function(){
+                    return new Cat();
+                };
+            }
+            
+            /*
+             * 具体工厂(Concrete Creator)角色：狗工厂 
+             */
+            DogFactory = function(){
+                this.create = function(){
+                    return new Dog();
+                };
+            }            
+            
+            /** 
+             * 抽象产品(Product)角色：动物特征 
+             * (用一个抽象类来实现)
+             */
+             AnimalFeatures = function(name){
+                 this.name = name;
+             };
+             AnimalFeatures.prototype = {
+                 setName: function(name){this.name = name},
+                 getName: function(){return this.name;},
+                 getInstruction:function(){throw 'You must implement abstractMethod getInstruction';}//定义一个抽象方法
+             };
+
+            /** 
+             * 具体产品(Concrete Product)角色：猫
+             */     
+             Cat = function(){
+                 AnimalFeatures.apply(this);
+             }
+             Cat.prototype = Object.create(AnimalFeatures.prototype);
+             Cat.prototype.constructor =Cat; 
+             Cat.prototype.price = 50;
+             Cat.prototype.getInstruction = function(){//重写抽象类getInstruction方法
+                 return "I'm a cat.";
+             }
+                     
+            /** 
+             * 具体产品(Concrete Product)角色：狗
+             */     
+             Dog = function(){
+                 AnimalFeatures.apply(this);
+             }
+             Dog.prototype = Object.create(AnimalFeatures.prototype);
+             Dog.prototype.constructor =Cat; 
+             Dog.prototype.price = 60;
+             Dog.prototype.getInstruction = function(){//重写抽象类getInstruction方法
+                 return "I'm a dog.";
+             }
+             
+             var catFactory = new CatFactory();
+             var cat = catFactory.create();
+             console.log(cat.getName());//undefined
+             cat.setName("Jimmy");
+             console.log(cat.getName());//Jimmy
+             console.log(cat.getInstruction());//I'm a cat.
+        </script>    
+    </head>
+</html>

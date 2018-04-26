@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>单例模式示例</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var SingletonBikeController = (function(){//采用闭包来实现，因为有私有变量啊
+                this.instance = null;
+                
+                this.SingleBike = function(ownerUser){
+                    this.ownerUser = ownerUser;
+                    this.getOwnerUser = function(){
+                        return this.ownerUser;
+                    }
+                }
+                return {//暴露的公共静态方法
+                    "getInstance":function(ownerUser){
+                        if(this.instance == null){
+                            this.instance = new SingleBike(ownerUser);
+                        }
+                         return this.instance;
+                    },
+                    "destroyInstance":function(instance){
+                        this.instance = null;
+                        instance.ownerUser = "";
+                    } 
+                }
+            })();
+            
+            var singletonBike = SingletonBikeController.getInstance("Mary");
+            console.log(singletonBike.getOwnerUser());//mary
+            singletonBike2 = SingletonBikeController.getInstance("Jack");
+            console.log(singletonBike2.getOwnerUser());//mary
+            SingletonBikeController.destroyInstance(singletonBike);
+            console.log(singletonBike.getOwnerUser());//""
+            singletonBike2 = SingletonBikeController.getInstance("Jack");
+            console.log(singletonBike2.getOwnerUser());//jack
+            
+            
+            var clone = SingletonBikeController;
+            console.log(clone);
+        </script>    
+    </head>
+</html>

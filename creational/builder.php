@@ -2,8 +2,6 @@
 /*
  * 建造者方法模式示例
  */
-error_reporting(E_ALL);
-ini_set('display_errors','on');
 
     /*
      * 具体产品（一个包含宠物和宠物食物的产品）

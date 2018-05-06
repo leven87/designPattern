@@ -2,8 +2,6 @@
 /*
  * 桥接模式示例
  */
-error_reporting(E_ALL);
-ini_set('display_errors','on');
 preg_match("/cli/i", php_sapi_name()) ? define('LINE_BREAK', PHP_EOL) : define('LINE_BREAK', "<br/>");
 
 /*

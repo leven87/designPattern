@@ -1,2 +1,2 @@
 # designPattern
-the examples of learning design pattern,include php version and javascript version.(学习设计模式的一些例子，包括php版本和javascript版本。)
+the examples of learning design pattern,include php , python, javascript version.(学习设计模式的一些例子，包括 php, python 和 javascript版本。)
